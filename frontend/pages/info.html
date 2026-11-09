@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Waste Information — e-Patong</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="navbar-inner">
+    <a href="/" class="navbar-logo"><span class="e">e-</span>Patong</a>
+    <button class="navbar-toggle" id="nav-toggle"><span></span><span></span><span></span></button>
+    <div class="navbar-links" id="nav-links">
+      <a href="/pages/scan.html">Scan</a>
+      <a href="/pages/dashboard.html" class="nav-auth-only">Dashboard</a>
+      <a href="/pages/catalog.html" class="nav-auth-only">Rewards</a>
+      <a href="/pages/info.html" class="active">E-Waste Info</a>
+    </div>
+    <div class="navbar-auth" id="nav-auth"></div>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="container">
+    <h1>♻️ E-Waste Information</h1>
+    <p>Learn about e-waste categories, their hazards, and how to dispose of them properly in the Philippines.</p>
+  </div>
+</div>
+
+<main class="container section" style="padding-top:2rem">
+
+  <!-- PH E-Waste Alert -->
+  <div class="card mb-4" style="background:rgba(231,76,60,.07);border-color:rgba(231,76,60,.3)">
+    <h3 style="color:var(--red);margin-bottom:.6rem">⚠️ Philippine E-Waste Crisis</h3>
+    <p style="font-size:.92rem">
+      The Philippines generated approximately <strong style="color:var(--white)">537,000 metric tons</strong> of e-waste in 2022
+      (4.7 kg per capita), yet the majority is handled by the informal sector using hazardous methods.
+      Improper disposal releases lead, mercury, and cadmium into soil and water sources.
+      Under <strong style="color:var(--white)">RA 9003</strong> and the <strong style="color:var(--white)">EPR Act of 2022</strong>,
+      producers and consumers share responsibility for proper e-waste management.
+    </p>
+  </div>
+
+  <!-- E-Waste Categories Grid -->
+  <h2 style="color:var(--white);margin-bottom:1.25rem">E-Waste Categories</h2>
+  <div class="grid-3 mb-4">
+    <!-- Mobile Phone -->
+    <div class="info-category-card">
+      <div class="info-category-icon">📱</div>
+      <div class="info-category-name">Mobile Phone</div>
+      <p style="font-size:.85rem">Smartphones and feature phones contain recoverable gold, silver, copper, and platinum in their circuit boards.</p>
+      <div style="margin-top:.6rem;font-size:.82rem;color:var(--accent)">💰 Scrap value: ₱50 – ₱200 &nbsp;|&nbsp; ⭐ 50 pts</div>
+      <div class="info-hazard-list">
+        <span class="hazard-tag">Lead</span><span class="hazard-tag">Mercury</span><span class="hazard-tag">Cadmium</span>
+      </div>
+      <p style="font-size:.8rem;color:var(--gray-dark);margin-top:.6rem">Remove battery first. Wipe all personal data before drop-off.</p>
+    </div>
+    <!-- Laptop -->
+    <div class="info-category-card">
+      <div class="info-category-icon">💻</div>
+      <div class="info-category-name">Laptop / Notebook</div>
+      <p style="font-size:.85rem">Laptops contain valuable aluminum casings, copper wiring, and recoverable rare earth metals in their components.</p>
+      <div style="margin-top:.6rem;font-size:.82rem;color:var(--accent)">💰 Scrap value: ₱200 – ₱800 &nbsp;|&nbsp; ⭐ 150 pts</div>
+      <div class="info-hazard-list">
+        <span class="hazard-tag">Lead</span><span class="hazard-tag">Cadmium</span><span class="hazard-tag">Chromium</span>
+      </div>
+      <p style="font-size:.8rem;color:var(--gray-dark);margin-top:.6rem">Backup and wipe your hard drive. Remove and separately recycle the battery.</p>
+    </div>
+    <!-- Tablet -->
+    <div class="info-category-card">
+      <div class="info-category-icon">📱</div>
+      <div class="info-category-name">Tablet</div>
+      <p style="font-size:.85rem">Tablets share similar composition to smartphones with lithium batteries and printed circuit boards requiring careful recycling.</p>
+      <div style="margin-top:.6rem;font-size:.82rem;color:var(--accent)">💰 Scrap value: ₱100 – ₱400 &nbsp;|&nbsp; ⭐ 80 pts</div>
+      <div class="info-hazard-list">
+        <span class="hazard-tag">Lithium</span><span class="hazard-tag">Lead</span>
+      </div>
+      <p style="font-size:.8rem;color:var(--gray-dark);margin-top:.6rem">Remove SIM and memory cards. Factory reset before drop-off.</p>
+    </div>
+    <!-- Battery -->
+    <div class="info-category-card">
+      <div class="info-category-icon">🔋</div>
+      <div class="info-category-name">Battery</div>
+      <p style="font-size:.85rem">Lithium-ion and lead-acid batteries are highly hazardous if improperly discarded and must never be thrown in regular trash.</p>
+      <div style="margin-top:.6rem;font-size:.82rem;color:var(--accent)">💰 Scrap value: ₱15 – ₱50 &nbsp;|&nbsp; ⭐ 30 pts</div>
+      <div class="info-hazard-list">
+        <span class="hazard-tag">Lithium</span><span class="hazard-tag">Lead</span><span class="hazard-tag">Sulfuric Acid</span>
+      </div>
+      <p style="font-size:.8rem;color:var(--gray-dark);margin-top:.6rem">Never puncture, crush, or incinerate. Drop at designated battery collection points.</p>
+    </div>
+    <!-- Charger -->
+    <div class="info-category-card">
+      <div class="info-category-icon">🔌</div>
+      <div class="info-category-name">Charger / Adapter</div>
+      <p style="font-size:.85rem">Chargers contain copper wiring and circuit components that are recyclable. Cables are made from PVC plastic requiring special processing.</p>
+      <div style="margin-top:.6rem;font-size:.82rem;color:var(--accent)">💰 Scrap value: ₱10 – ₱40 &nbsp;|&nbsp; ⭐ 20 pts</div>
+      <div class="info-hazard-list">
+        <span class="hazard-tag">PVC</span><span class="hazard-tag">Lead</span>
+      </div>
+      <p style="font-size:.8rem;color:var(--gray-dark);margin-top:.6rem">Bundle cables neatly. Drop at any e-waste bin or participating electronics store.</p>
+    </div>
+    <!-- PCB -->
+    <div class="info-category-card">
+      <div class="info-category-icon">🖥️</div>
+      <div class="info-category-name">Circuit Board (PCB)</div>
+      <p style="font-size:.85rem">Printed circuit boards contain the highest concentration of precious metals including gold, silver, and palladium — the most valuable e-waste type.</p>
+      <div style="margin-top:.6rem;font-size:.82rem;color:var(--accent)">💰 Scrap value: ₱100 – ₱400 &nbsp;|&nbsp; ⭐ 100 pts</div>
+      <div class="info-hazard-list">
+        <span class="hazard-tag">Lead</span><span class="hazard-tag">Arsenic</span><span class="hazard-tag">Beryllium</span>
+      </div>
+      <p style="font-size:.8rem;color:var(--gray-dark);margin-top:.6rem">Place in anti-static bag. Wear gloves — components may have sharp edges and toxic residue.</p>
+    </div>
+    <!-- Monitor -->
+    <div class="info-category-card">
+      <div class="info-category-icon">🖥️</div>
+      <div class="info-category-name">Monitor / Display</div>
+      <p style="font-size:.85rem">LCD monitors contain mercury in backlight lamps. CRT monitors have lead-containing glass requiring specialized recycling.</p>
+      <div style="margin-top:.6rem;font-size:.82rem;color:var(--accent)">💰 Scrap value: ₱150 – ₱500 &nbsp;|&nbsp; ⭐ 120 pts</div>
+      <div class="info-hazard-list">
+        <span class="hazard-tag">Lead</span><span class="hazard-tag">Mercury</span><span class="hazard-tag">Cadmium</span>
+      </div>
+      <p style="font-size:.8rem;color:var(--gray-dark);margin-top:.6rem">Do not crack the screen. CRTs are especially hazardous — handle carefully and transport upright.</p>
+    </div>
+    <!-- Keyboard -->
+    <div class="info-category-card">
+      <div class="info-category-icon">⌨️</div>
+      <div class="info-category-name">Keyboard</div>
+      <p style="font-size:.85rem">Keyboards are primarily plastic and metal. They contain small circuit boards and may have brominated flame retardants in their casings.</p>
+      <div style="margin-top:.6rem;font-size:.82rem;color:var(--accent)">💰 Scrap value: ₱20 – ₱80 &nbsp;|&nbsp; ⭐ 25 pts</div>
+      <div class="info-hazard-list">
+        <span class="hazard-tag">PVC</span><span class="hazard-tag">BFRs</span>
+      </div>
+      <p style="font-size:.8rem;color:var(--gray-dark);margin-top:.6rem">Can be disassembled for separate plastic and metal recovery at most recycling facilities.</p>
+    </div>
+    <!-- Mouse -->
+    <div class="info-category-card">
+      <div class="info-category-icon">🖱️</div>
+      <div class="info-category-name">Mouse</div>
+      <p style="font-size:.85rem">Computer mice contain small circuit boards, optical sensors, and copper wiring within plastic enclosures.</p>
+      <div style="margin-top:.6rem;font-size:.82rem;color:var(--accent)">💰 Scrap value: ₱10 – ₱40 &nbsp;|&nbsp; ⭐ 15 pts</div>
+      <div class="info-hazard-list">
+        <span class="hazard-tag">PVC</span><span class="hazard-tag">BFRs</span>
+      </div>
+      <p style="font-size:.8rem;color:var(--gray-dark);margin-top:.6rem">Remove batteries if any. Drop at e-waste collection points or electronics stores.</p>
+    </div>
+    <!-- Television -->
+    <div class="info-category-card">
+      <div class="info-category-icon">📺</div>
+      <div class="info-category-name">Television</div>
+      <p style="font-size:.85rem">TVs are large, bulky e-waste. Older CRT televisions contain several kg of lead in their glass tubes.</p>
+      <div style="margin-top:.6rem;font-size:.82rem;color:var(--accent)">💰 Scrap value: ₱200 – ₱600 &nbsp;|&nbsp; ⭐ 130 pts</div>
+      <div class="info-hazard-list">
+        <span class="hazard-tag">Lead</span><span class="hazard-tag">Mercury</span><span class="hazard-tag">Cadmium</span>
+      </div>
+      <p style="font-size:.8rem;color:var(--gray-dark);margin-top:.6rem">Contact the Barangay Hall of Brgy. 49 Youngfield for scheduled e-waste collection days for bulky items.</p>
+    </div>
+  </div>
+
+  <!-- Disposal Resources -->
+  <div class="grid-2 mb-4">
+    <div class="card">
+      <h3 style="color:var(--white);margin-bottom:1rem">🏛️ Philippine Legal Framework</h3>
+      <ul style="display:flex;flex-direction:column;gap:.6rem">
+        <li style="font-size:.88rem;color:var(--gray)">
+          <strong style="color:var(--white)">RA 9003</strong> — Ecological Solid Waste Management Act: Mandates proper segregation and disposal of all solid waste including electronics.
+        </li>
+        <li style="font-size:.88rem;color:var(--gray)">
+          <strong style="color:var(--white)">RA 6969</strong> — Toxic Substances and Hazardous Waste Act: Regulates importation, manufacture, and disposal of hazardous materials found in e-waste.
+        </li>
+        <li style="font-size:.88rem;color:var(--gray)">
+          <strong style="color:var(--white)">EPR Act of 2022</strong> — Extended Producer Responsibility Act: Requires brand owners and importers to establish e-waste take-back programs.
+        </li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 style="color:var(--white);margin-bottom:1rem">🔗 Disposal Resources</h3>
+      <div style="display:flex;flex-direction:column;gap:.75rem">
+        <a href="https://www.denr.gov.ph" target="_blank" class="btn btn-ghost btn-sm" style="justify-content:flex-start">🌿 DENR Official Website</a>
+        <a href="https://emb.gov.ph/hazardouswaste/" target="_blank" class="btn btn-ghost btn-sm" style="justify-content:flex-start">⚗️ EMB Hazardous Waste Division</a>
+        <a href="https://emb.gov.ph/solid-waste-management/" target="_blank" class="btn btn-ghost btn-sm" style="justify-content:flex-start">♻️ EMB Solid Waste Management</a>
+        <a href="https://r8.emb.gov.ph" target="_blank" class="btn btn-ghost btn-sm" style="justify-content:flex-start">📍 EMB Region 8 – Eastern Visayas</a>
+        <a href="https://ncr.emb.gov.ph" target="_blank" class="btn btn-ghost btn-sm" style="justify-content:flex-start">📍 EMB NCR – TSD Facilities Directory</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Barangay Contact -->
+  <div class="card mb-4">
+    <h3 style="color:var(--white);margin-bottom:1rem">🏘️ Barangay 49 Youngfield</h3>
+    <p style="font-size:.88rem;color:var(--gray);margin-bottom:.9rem">
+      For questions about e-waste collection and disposal in your area, contact your barangay.
+    </p>
+    <ul style="display:flex;flex-direction:column;gap:.5rem;font-size:.88rem;color:var(--gray)">
+      <li><strong style="color:var(--white)">Barangay Captain:</strong> Hon. Rose Faith Uy-Kieng</li>
+      <li><strong style="color:var(--white)">Address:</strong> Brgy. 49 Youngfield, Tacloban City</li>
+      <li><strong style="color:var(--white)">Contact:</strong> <a href="tel:09759041851" style="color:var(--accent)">0975 904 1851</a></li>
+    </ul>
+  </div>
+
+  <!-- Model Setup Guide -->
+  <div class="card" id="model-setup" style="border-color:rgba(243,156,18,.3);background:rgba(243,156,18,.05)">
+    <h3 style="color:var(--orange);margin-bottom:.75rem">⚡ Setting Up Your AI Classification Model</h3>
+    <p style="font-size:.9rem;color:var(--gray);margin-bottom:1rem">
+      e-Patong uses a Google Teachable Machine model for image classification. Follow these steps to train and add your model:
+    </p>
+    <ol style="display:flex;flex-direction:column;gap:.7rem;padding-left:1.5rem">
+      <li style="font-size:.88rem;color:var(--gray)">Go to <a href="https://teachablemachine.withgoogle.com" target="_blank" style="color:var(--accent)">teachablemachine.withgoogle.com</a> and create a new <strong style="color:var(--white)">Image Project</strong>.</li>
+      <li style="font-size:.88rem;color:var(--gray)">Create <strong style="color:var(--white)">10 classes</strong> — one for each e-waste category (Mobile Phone, Laptop, Tablet, Battery, Charger/Adapter, Circuit Board, Monitor/Display, Keyboard, Mouse, Television). Class names must match exactly.</li>
+      <li style="font-size:.88rem;color:var(--gray)">Add at least <strong style="color:var(--white)">30–50 photos</strong> per class. Use varied angles, lighting, and backgrounds.</li>
+      <li style="font-size:.88rem;color:var(--gray)">Click <strong style="color:var(--white)">Train Model</strong> and wait for training to complete.</li>
+      <li style="font-size:.88rem;color:var(--gray)">Click <strong style="color:var(--white)">Export Model → TensorFlow.js → Download</strong>. You'll get a ZIP file.</li>
+      <li style="font-size:.88rem;color:var(--gray)">Extract the ZIP and copy <code style="color:var(--accent)">model.json</code>, <code style="color:var(--accent)">metadata.json</code>, and <code style="color:var(--accent)">weights.bin</code> into <code style="color:var(--accent)">frontend/assets/model/</code>.</li>
+      <li style="font-size:.88rem;color:var(--gray)">Restart the server and reload the Scan page — the model will load automatically.</li>
+    </ol>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <p>© 2026 <strong>e-Patong</strong> — EVSU Information Technology Department</p>
+  <p class="mt-1">Developed for <strong>Brgy. 49 Youngfield</strong>, Tacloban City</p>
+  <p class="mt-1">Data sources: DENR, EMB, Global E-Waste Monitor 2024</p>
+</footer>
+
+<div id="toast-container"></div>
+<script src="../js/api.js"></script>
+<script src="../js/auth.js"></script>
+<script>document.addEventListener('DOMContentLoaded', initAuth);</script>
+</body>
+</html>

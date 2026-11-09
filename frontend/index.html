@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>e-Patong — E-Waste Classification & Reward System</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+<!-- ── NAVBAR ── -->
+<nav class="navbar">
+  <div class="navbar-inner">
+    <a href="/" class="navbar-logo"><span class="e">e-</span>Patong</a>
+    <button class="navbar-toggle" id="nav-toggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="navbar-links" id="nav-links">
+      <a href="/pages/scan.html">Scan</a>
+      <a href="/pages/dashboard.html" class="nav-auth-only">Dashboard</a>
+      <a href="/pages/catalog.html" class="nav-auth-only">Rewards</a>
+      <a href="/pages/info.html">E-Waste Info</a>
+    </div>
+    <div class="navbar-auth" id="nav-auth"></div>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="container flex items-center justify-between" style="flex-wrap:wrap;gap:2rem">
+    <div class="hero-content">
+      <div class="hero-eyebrow">♻️ E-Waste Awareness Platform</div>
+      <h1>
+        Know Your E-Waste,
+        <span class="line-accent">Earn Rewards.</span>
+      </h1>
+      <p>
+        Scan any electronic waste with your camera. e-Patong instantly
+        classifies it, tells you if it's still usable, shows its scrap value,
+        and rewards you with points you can redeem for real rewards.
+      </p>
+      <div class="hero-cta">
+        <a href="/pages/scan.html" class="btn btn-primary btn-lg">📷 Start Scanning</a>
+        <a href="/pages/info.html" class="btn btn-outline btn-lg">Learn About E-Waste</a>
+      </div>
+      <!-- Same four numbers as Admin → Overview. Filled in by js/home-stats.js.
+           The "–" shows until the numbers arrive (or if they can't be loaded). -->
+      <div class="hero-stats">
+        <div class="hero-stat-item" data-stat="users">
+          <span class="hero-stat-num">–</span>
+          <span class="hero-stat-label">Users</span>
+        </div>
+        <div class="hero-stat-item" data-stat="scans">
+          <span class="hero-stat-num">–</span>
+          <span class="hero-stat-label">Scans</span>
+        </div>
+        <div class="hero-stat-item" data-stat="vouchers">
+          <span class="hero-stat-num">–</span>
+          <span class="hero-stat-label">Vouchers</span>
+        </div>
+        <div class="hero-stat-item" data-stat="points">
+          <span class="hero-stat-num">–</span>
+          <span class="hero-stat-label">Points given</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-icon-wrap">
+        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M50 10 L62 32 H38 Z" fill="#2ECC71" opacity="0.9"/>
+          <path d="M62 32 H82 L70 54 Z" fill="#27AE60" opacity="0.8"/>
+          <path d="M38 32 L26 54 H50 Z" fill="#1E8449" opacity="0.7"/>
+          <path d="M70 54 L58 76 L46 54 Z" fill="#2ECC71" opacity="0.85"/>
+          <path d="M46 54 L34 76 H58 Z" fill="#27AE60" opacity="0.75"/>
+          <circle cx="50" cy="50" r="8" fill="#0D2818" stroke="#2ECC71" stroke-width="2"/>
+          <circle cx="50" cy="50" r="4" fill="#2ECC71"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FEATURES ── -->
+<section class="section" style="background:var(--bg-mid)">
+  <div class="container">
+    <div class="text-center mb-4">
+      <h2>Everything You Need to Dispose <span class="text-accent">Responsibly</span></h2>
+      <p class="mt-2">One platform. Scan, learn, earn, and redeem.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📷</div>
+        <h3>Real-Time Scanning</h3>
+        <p>Point your camera at any e-waste item and get an instant AI-powered classification.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔍</div>
+        <h3>Usability Check</h3>
+        <p>The system tells you if the item is still usable, good for parts only, or should go for disposal.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💰</div>
+        <h3>Scrap Value Estimate</h3>
+        <p>See the estimated PHP scrap or recycling value for your specific e-waste type immediately.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⭐</div>
+        <h3>Earn & Redeem Points</h3>
+        <p>Log in with Google to earn reward points per scan. Exchange them for GCash, e-load, and more.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ── -->
+<section class="section">
+  <div class="container">
+    <div class="text-center mb-4">
+      <h2>How <span class="text-accent">e-Patong</span> Works</h2>
+      <p class="mt-2">Three simple steps to responsible e-waste disposal.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <h3>Scan Your E-Waste</h3>
+        <p>Upload a photo or use your camera to capture your electronic item. No account needed for this step.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <h3>Get Classification & Value</h3>
+        <p>Our AI classifies the item, checks its condition, shows the scrap value, and guides you on proper disposal.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <h3>Earn Points & Redeem</h3>
+        <p>Log in with Google to save scans and earn points. Exchange your points for GCash credits, e-load, and more.</p>
+      </div>
+    </div>
+    <div class="text-center mt-4">
+      <a href="/pages/scan.html" class="btn btn-primary btn-lg">Get Started — It's Free</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── REWARD PREVIEW ── -->
+<section class="section" style="background:var(--bg-mid)">
+  <div class="container">
+    <div class="text-center mb-4">
+      <h2>Rewards You Can <span class="text-accent">Actually Earn</span></h2>
+      <p class="mt-2">Exchange your scan points for these rewards via the Redemption Catalog.</p>
+    </div>
+    <div class="grid-2" style="max-width:640px;margin:0 auto">
+      <div class="card text-center">
+        <div style="font-size:2.5rem;margin-bottom:.75rem">💚</div>
+        <div class="card-title">GCash Credits</div>
+        <div class="text-sm text-gray">₱20 · ₱50 · ₱100 · ₱200</div>
+        <div class="text-sm text-accent mt-1">from 200 pts</div>
+      </div>
+      <div class="card text-center">
+        <div style="font-size:2.5rem;margin-bottom:.75rem">📱</div>
+        <div class="card-title">E-Load</div>
+        <div class="text-sm text-gray">₱20 · ₱50 for any network</div>
+        <div class="text-sm text-accent mt-1">from 180 pts</div>
+      </div>
+    </div>
+    <div class="text-center mt-4">
+      <a href="/api/auth/google" class="btn btn-outline login-cta" data-logged-in-text="✅ You're already logged in — view your dashboard" data-logged-in-href="/pages/dashboard.html">Sign in with Google to Start Earning</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── BARANGAY CLIENT ── -->
+<section class="section" style="padding:2.5rem 0">
+  <div class="container">
+    <div class="card text-center" style="max-width:640px;margin:0 auto">
+      <div style="font-size:2.2rem;margin-bottom:.5rem">🏘️</div>
+      <div class="card-title">Brgy. 49 Youngfield, Tacloban City</div>
+      <p class="text-sm text-gray mt-1">
+        e-Patong is developed for Barangay 49 Youngfield to help residents
+        identify, value, and responsibly dispose of their e-waste.
+      </p>
+      <p class="text-sm text-gray mt-1">
+        Barangay Captain: <strong style="color:var(--white)">Hon. Rose Faith Uy-Kieng</strong>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ── DISCLAIMER ── -->
+<section class="section" style="padding:2.5rem 0">
+  <div class="container">
+    <div class="card" style="border-color:rgba(243,156,18,0.3);background:rgba(243,156,18,0.05)">
+      <p style="font-size:0.88rem;color:var(--gray)">
+        <strong style="color:var(--orange)">⚠️ Important Note:</strong>
+        e-Patong is an informational and awareness platform. It does not collect, transport, or process physical e-waste.
+        Voucher codes are for demonstration purposes; actual fulfillment is subject to partner agreements.
+        Scrap values are estimates based on current market data and may vary by location.
+        Always dispose of e-waste at <a href="https://emb.gov.ph" target="_blank" style="color:var(--accent)">DENR/EMB-accredited facilities</a>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="footer">
+  <p>© 2026 <strong>e-Patong</strong> — Eastern Visayas State University, IT Department</p>
+  <p class="mt-1">Developed for <strong>Brgy. 49 Youngfield</strong>, Tacloban City</p>
+  <p class="mt-1">
+    <a href="/pages/info.html">E-Waste Info</a> ·
+    <a href="https://denr.gov.ph" target="_blank">DENR</a> ·
+    <a href="https://emb.gov.ph" target="_blank">EMB</a>
+  </p>
+</footer>
+
+<div id="toast-container"></div>
+<script src="./js/api.js"></script>
+<script src="./js/auth.js"></script>
+<script src="./js/home-stats.js"></script>
+<script>document.addEventListener('DOMContentLoaded', initAuth);</script>
+</body>
+</html>

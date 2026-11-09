@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scan E-Waste — e-Patong</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/scan-levels.css?v=2">
+</head>
+<body>
+
+<!-- ── NAVBAR ── -->
+<nav class="navbar">
+  <div class="navbar-inner">
+    <a href="/" class="navbar-logo"><span class="e">e-</span>Patong</a>
+    <button class="navbar-toggle" id="nav-toggle"><span></span><span></span><span></span></button>
+    <div class="navbar-links" id="nav-links">
+      <a href="/pages/scan.html" class="active">Scan</a>
+      <a href="/pages/dashboard.html" class="nav-auth-only">Dashboard</a>
+      <a href="/pages/catalog.html" class="nav-auth-only">Rewards</a>
+      <a href="/pages/info.html">E-Waste Info</a>
+    </div>
+    <div class="navbar-auth" id="nav-auth"></div>
+  </div>
+</nav>
+
+<!-- ── PAGE HEADER ── -->
+<div class="page-header">
+  <div class="container">
+    <h1>📷 Scan Your E-Waste</h1>
+    <p>Upload a photo or use your camera. Our AI will classify the item, check its condition, and show its value.</p>
+    <div class="flex items-center gap-2 mt-2">
+      <span id="model-status" class="text-sm" style="color:var(--gray)">⏳ Loading AI model...</span>
+    </div>
+  </div>
+</div>
+
+<main class="container section" style="padding-top:2rem">
+
+  <!-- Demo Mode Banner -->
+  <div class="demo-banner hidden" id="demo-banner">
+    <span>⚡</span>
+    <div>
+      <strong>Demo Mode Active</strong> — Results are made up for testing.
+      Nothing is saved and no points are given.
+      <a href="/pages/info.html#model-setup" style="color:var(--orange);text-decoration:underline">How to add your model →</a>
+    </div>
+  </div>
+
+  <div class="scan-layout">
+    <!-- Left: Image Input -->
+    <div>
+      <div class="scan-box" id="scan-box">
+        <!-- Camera video feed -->
+        <video id="camera-video" class="hidden" autoplay playsinline
+               style="width:100%;height:340px;object-fit:cover;border-radius:var(--radius)"></video>
+        <!-- Image preview -->
+        <img id="preview-img" class="hidden" alt="Preview" style="width:100%;height:340px;object-fit:contain;border-radius:var(--radius)">
+        <!-- Placeholder -->
+        <div class="scan-placeholder" id="scan-placeholder">
+          <div class="scan-placeholder-icon">♻️</div>
+          <strong style="color:var(--white)">No image selected</strong>
+          <p>Upload a photo or use your camera to scan an e-waste item</p>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="scan-controls mt-3">
+        <label for="file-input" class="btn btn-outline">
+          📁 Upload Image
+        </label>
+        <input type="file" id="file-input" accept="image/*" class="hidden">
+
+        <button class="btn btn-ghost" id="start-camera-btn">📷 Use Camera</button>
+        <button class="btn btn-ghost hidden" id="stop-camera-btn">✕ Stop Camera</button>
+        <button class="btn btn-ghost hidden" id="camera-scan-btn">📸 Capture & Scan</button>
+      </div>
+
+      <button class="btn btn-primary btn-full mt-2" id="scan-btn" style="font-size:1rem;padding:.85rem">
+        🔍 Scan Now
+      </button>
+
+      <!-- Guest notice -->
+      <div class="card mt-3 login-cta" style="background:var(--accent-dim);border-color:rgba(46,204,113,0.3)" id="guest-notice"
+           data-logged-in-text="✅ You're logged in — points will be added to your account after each scan!">
+        <p style="font-size:0.88rem;color:var(--offwhite)">
+          💡 <strong>Tip:</strong> You can scan as a guest, but
+          <a href="/api/auth/google" style="color:var(--accent);font-weight:600">sign in with Google</a>
+          to earn points and track your scans.
+        </p>
+      </div>
+    </div>
+
+    <!-- Right: Results Panel -->
+    <div>
+      <!-- Initial placeholder -->
+      <div id="result-placeholder" class="card" style="text-align:center;padding:3rem 2rem">
+        <div style="font-size:3rem;margin-bottom:1rem">🤖</div>
+        <h3 style="color:var(--white)">Results will appear here</h3>
+        <p class="mt-1">Scan or upload an e-waste photo to see classification, condition, scrap value, and earn points.</p>
+      </div>
+      <!-- Result panel (populated by JS) -->
+      <div id="result-panel" class="hidden"></div>
+    </div>
+  </div>
+
+  <!-- Accepted E-Waste Types -->
+  <div class="mt-4">
+    <h3 style="color:var(--white);margin-bottom:1.25rem">Accepted E-Waste Categories</h3>
+    <div class="grid-4" style="gap:0.75rem">
+      <div class="card" style="padding:.9rem;text-align:center;font-size:.85rem">
+        <span style="font-size:1.5rem;display:block;margin-bottom:.3rem">📱</span>
+        <span style="color:var(--offwhite)">Mobile Phone</span>
+      </div>
+      <div class="card" style="padding:.9rem;text-align:center;font-size:.85rem">
+        <span style="font-size:1.5rem;display:block;margin-bottom:.3rem">💻</span>
+        <span style="color:var(--offwhite)">Laptop</span>
+      </div>
+      <div class="card" style="padding:.9rem;text-align:center;font-size:.85rem">
+        <span style="font-size:1.5rem;display:block;margin-bottom:.3rem">📱</span>
+        <span style="color:var(--offwhite)">Tablet</span>
+      </div>
+      <div class="card" style="padding:.9rem;text-align:center;font-size:.85rem">
+        <span style="font-size:1.5rem;display:block;margin-bottom:.3rem">🔋</span>
+        <span style="color:var(--offwhite)">Battery</span>
+      </div>
+      <div class="card" style="padding:.9rem;text-align:center;font-size:.85rem">
+        <span style="font-size:1.5rem;display:block;margin-bottom:.3rem">🔌</span>
+        <span style="color:var(--offwhite)">Charger/Adapter</span>
+      </div>
+      <div class="card" style="padding:.9rem;text-align:center;font-size:.85rem">
+        <span style="font-size:1.5rem;display:block;margin-bottom:.3rem">🖥️</span>
+        <span style="color:var(--offwhite)">Circuit Board</span>
+      </div>
+      <div class="card" style="padding:.9rem;text-align:center;font-size:.85rem">
+        <span style="font-size:1.5rem;display:block;margin-bottom:.3rem">🖥️</span>
+        <span style="color:var(--offwhite)">Monitor/Display</span>
+      </div>
+      <div class="card" style="padding:.9rem;text-align:center;font-size:.85rem">
+        <span style="font-size:1.5rem;display:block;margin-bottom:.3rem">⌨️</span>
+        <span style="color:var(--offwhite)">Keyboard</span>
+      </div>
+      <div class="card" style="padding:.9rem;text-align:center;font-size:.85rem">
+        <span style="font-size:1.5rem;display:block;margin-bottom:.3rem">🖱️</span>
+        <span style="color:var(--offwhite)">Mouse</span>
+      </div>
+      <div class="card" style="padding:.9rem;text-align:center;font-size:.85rem">
+        <span style="font-size:1.5rem;display:block;margin-bottom:.3rem">📺</span>
+        <span style="color:var(--offwhite)">Television</span>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <p>© 2026 <strong>e-Patong</strong> — EVSU Information Technology Department</p>
+  <p class="mt-1">Developed for <strong>Brgy. 49 Youngfield</strong>, Tacloban City</p>
+</footer>
+
+<div id="toast-container"></div>
+
+<!-- TensorFlow.js + Teachable Machine -->
+<!-- Library versions are PINNED (these are the versions "latest" gave us when we tested),
+     so a new release on the CDN can't change or break the scanner by surprise. -->
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8.5/dist/teachablemachine-image.min.js"></script>
+<script src="../js/api.js?v=3"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/condition-rules.js?v=1"></script>
+<script src="../js/photo-quality.js?v=1"></script>
+<script src="../js/scan.js?v=4"></script>
+</body>
+</html>

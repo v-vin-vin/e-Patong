@@ -1,0 +1,107 @@
+/* ============================================================
+   e-Patong — Confidence level styles (HIGH / MEDIUM / LOW)
+   Loaded AFTER style.css on the scan page only.
+   Every level has an ICON and TEXT, so it never depends on color alone.
+   ============================================================ */
+
+/* The coloured note at the top of the result */
+.level-banner {
+  display: flex; align-items: flex-start; gap: 0.9rem;
+  padding: 1rem 1.1rem; margin-bottom: 1.1rem;
+  border-radius: var(--radius); border: 1px solid transparent;
+}
+.level-icon  { font-size: 1.7rem; line-height: 1.2; flex-shrink: 0; }
+.level-title { font-weight: 700; color: var(--white); font-size: 1rem; }
+.level-text  { font-size: 0.88rem; color: var(--offwhite); margin-top: 0.15rem; }
+
+.level-high   { background: rgba(46, 204, 113, 0.10); border-color: rgba(46, 204, 113, 0.35); }
+.level-medium { background: rgba(241, 196, 15, 0.13); border-color: rgba(241, 196, 15, 0.50); }
+.level-low    { background: rgba(231, 76, 60, 0.10);  border-color: rgba(231, 76, 60, 0.35); }
+
+/* MEDIUM: "Laptop (62%) or Tablet (31%). Which is it?" */
+.guess-question { font-size: 1rem; color: var(--offwhite); margin-bottom: 0.9rem; }
+.guess-question strong { color: var(--white); }
+
+.guess-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+.guess-btn {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 0.2rem; min-height: 84px; padding: 0.8rem 0.6rem;
+  background: var(--bg-card2); color: var(--white);
+  border: 2px solid rgba(241, 196, 15, 0.45); border-radius: var(--radius);
+  font-family: inherit; cursor: pointer; transition: var(--transition);
+}
+.guess-btn:hover:not(:disabled), .guess-btn:focus-visible { border-color: var(--accent); background: var(--accent-dim); outline: none; }
+.guess-btn:disabled { opacity: 0.6; cursor: wait; }
+.guess-icon { font-size: 1.6rem; line-height: 1; }
+.guess-name { font-weight: 700; font-size: 0.95rem; text-align: center; }
+.guess-pct  { font-size: 0.85rem; color: var(--gray); }
+
+/* "Condition not checked" box (MEDIUM) */
+.condition-banner.not-checked { background: rgba(52, 152, 219, 0.10); border: 1px solid rgba(52, 152, 219, 0.30); }
+
+/* Photo tips (MEDIUM and LOW) */
+.photo-tips-box { margin-top: 1.1rem; }
+.photo-tips-title { font-size: 0.85rem; font-weight: 600; color: var(--white); margin-bottom: 0.5rem; }
+.photo-tips { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+.photo-tips li {
+  display: flex; align-items: center; gap: 0.5rem;
+  padding: 0.55rem 0.7rem; font-size: 0.85rem; color: var(--offwhite);
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm);
+}
+
+.retake-btn { margin-top: 1.1rem; min-height: 48px; font-size: 1rem; }
+
+/* Phones */
+@media (max-width: 480px) {
+  .guess-buttons { grid-template-columns: 1fr; }
+  .guess-btn { flex-direction: row; justify-content: flex-start; gap: 0.8rem; min-height: 64px; padding: 0.8rem 1rem; }
+  .guess-name { text-align: left; flex: 1; }
+  .photo-tips { grid-template-columns: 1fr; }
+}
+
+
+/* ============================================================
+   Condition questions (HIGH result)
+   ============================================================ */
+.condition-form {
+  margin: 1rem 0; padding: 1rem 1.1rem;
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+}
+.cf-title { font-weight: 700; color: var(--white); }
+.cf-sub   { font-size: 0.85rem; color: var(--gray); margin: 0.2rem 0 0.9rem; }
+.q-block  { border: 0; padding: 0; margin: 0 0 0.9rem; min-width: 0; }
+.q-block:last-child { margin-bottom: 0; }
+.q-title  { font-size: 0.9rem; font-weight: 600; color: var(--offwhite); margin-bottom: 0.45rem; padding: 0; }
+.choices  { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+/* big, tappable answer buttons (real radio buttons, so the keyboard works too) */
+.choice { position: relative; display: inline-flex; }
+.choice input { position: absolute; opacity: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+.choice span {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0.5rem 0.9rem;
+  font-size: 0.88rem; color: var(--offwhite); background: var(--bg-card2);
+  border: 2px solid var(--border); border-radius: var(--radius-sm); transition: var(--transition);
+}
+.choice:hover span { border-color: var(--accent); }
+.choice input:checked + span { color: var(--white); background: var(--accent-dim); border-color: var(--accent); font-weight: 600; }
+.choice input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+.choice input:disabled + span { opacity: 0.6; cursor: default; }
+
+/* ============================================================
+   "Was this right?"
+   ============================================================ */
+.feedback-box {
+  margin-top: 1.1rem; padding: 0.9rem 1rem;
+  background: var(--bg-card); border: 1px dashed var(--border); border-radius: var(--radius);
+}
+.fb-title    { font-size: 0.92rem; font-weight: 600; color: var(--white); margin-bottom: 0.5rem; }
+.fb-optional { font-weight: 400; color: var(--gray); }
+.fb-row      { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+.fb-row .form-input { flex: 1 1 180px; min-width: 0; }
+.fb-more     { margin-top: 0.6rem; }
+.feedback-box .btn { min-height: 44px; }
+
+@media (max-width: 480px) {
+  .choices { flex-direction: column; }
+  .choice, .choice span { width: 100%; }
+}

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — e-Patong</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="navbar-inner">
+    <a href="/" class="navbar-logo"><span class="e">e-</span>Patong</a>
+    <button class="navbar-toggle" id="nav-toggle"><span></span><span></span><span></span></button>
+    <div class="navbar-links" id="nav-links">
+      <a href="/pages/scan.html">Scan</a>
+      <a href="/pages/dashboard.html" class="active nav-auth-only">Dashboard</a>
+      <a href="/pages/catalog.html" class="nav-auth-only">Rewards</a>
+      <a href="/pages/info.html">E-Waste Info</a>
+    </div>
+    <div class="navbar-auth" id="nav-auth"></div>
+  </div>
+</nav>
+
+<!-- ── LOADING (shown briefly while we check login status) ── -->
+<div id="auth-loading">
+  <div class="container section" style="padding-top:5rem;text-align:center">
+    <div class="spinner" style="margin:0 auto"></div>
+    <p class="mt-3" style="color:var(--gray)">Checking your login status…</p>
+  </div>
+</div>
+
+<!-- ── LOGIN GATE (shown only when NOT logged in) ── -->
+<div id="login-gate" class="hidden">
+  <div class="container section" style="padding-top:4rem;text-align:center">
+    <div style="font-size:3.5rem;margin-bottom:1rem">🔒</div>
+    <h1 style="color:var(--white)">Sign In to View Your Dashboard</h1>
+    <p class="mt-2" data-gate-message style="max-width:440px;margin-left:auto;margin-right:auto">
+      Your dashboard tracks your scan history, points balance, and redeemed vouchers.
+      Sign in with Google to see your personal stats.
+    </p>
+    <div class="mt-4">
+      <a href="/api/auth/google" class="btn btn-google btn-lg">
+        <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+        Sign in with Google
+      </a>
+    </div>
+    <p class="mt-3 text-sm">
+      Just want to try scanning first? <a href="/pages/scan.html">Scan as a guest →</a>
+    </p>
+  </div>
+</div>
+
+<!-- ── PAGE CONTENT (shown only when logged in) ── -->
+<div id="page-content" class="hidden">
+
+<div class="page-header">
+  <div class="container">
+    <h1>📊 My Dashboard</h1>
+    <p>Track your scans, points balance, and progress toward your next reward.</p>
+  </div>
+</div>
+
+<main class="container section" style="padding-top:2rem">
+
+  <div class="dashboard-grid">
+
+    <!-- Left: Profile Card -->
+    <div>
+      <div class="profile-card">
+        <div id="profile-avatar"></div>
+        <div class="profile-name"  id="profile-name">Loading...</div>
+        <div class="profile-email" id="profile-email"></div>
+        <div id="member-since" class="text-sm text-gray mt-1"></div>
+
+        <div class="points-display">
+          <div class="num" id="profile-points">—</div>
+          <div class="label">Reward Points</div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div style="text-align:left">
+          <div class="text-sm text-gray mb-1">Next Reward Progress</div>
+          <div id="next-reward-progress">
+            <div class="spinner" style="width:24px;height:24px;margin:auto"></div>
+          </div>
+        </div>
+
+        <div class="flex gap-2 mt-3" style="flex-direction:column">
+          <a href="/pages/scan.html" class="btn btn-primary btn-sm">📷 New Scan</a>
+          <a href="/pages/catalog.html" class="btn btn-outline btn-sm">🎁 Redeem Points</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Main Content -->
+    <div>
+
+      <!-- Stats Row -->
+      <div class="stats-row">
+        <div class="card">
+          <div class="card-sub">Total Points</div>
+          <div class="card-value" id="stat-points">—</div>
+          <div class="card-sub">earned</div>
+        </div>
+        <div class="card">
+          <div class="card-sub">Total Scans</div>
+          <div class="card-value" id="stat-scans">—</div>
+          <div class="card-sub">items scanned</div>
+        </div>
+        <div class="card">
+          <div class="card-sub">Vouchers</div>
+          <div class="card-value" id="stat-vouchers">—</div>
+          <div class="card-sub">redeemed</div>
+        </div>
+      </div>
+
+      <!-- Scan History -->
+      <div class="card" style="padding:0;overflow:hidden">
+        <div class="flex justify-between items-center" style="padding:1.25rem 1.5rem;border-bottom:1px solid var(--border)">
+          <h3 style="color:var(--white)">📋 Scan History</h3>
+          <a href="/pages/scan.html" class="btn btn-ghost btn-sm">+ New Scan</a>
+        </div>
+        <div id="scan-history" style="padding:1rem">
+          <div class="loading-overlay"><div class="spinner"></div><p>Loading...</p></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+</div><!-- /#page-content -->
+
+<footer class="footer">
+  <p>© 2026 <strong>e-Patong</strong> — EVSU Information Technology Department</p>
+  <p class="mt-1">Developed for <strong>Brgy. 49 Youngfield</strong>, Tacloban City</p>
+</footer>
+
+<div id="toast-container"></div>
+<script src="../js/api.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin — e-Patong</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body>
+
+<!-- Same navbar as your other pages. The "Admin" link is added by auth.js for admins only. -->
+<nav class="navbar">
+  <div class="navbar-inner">
+    <a href="/" class="navbar-logo"><span class="e">e-</span>Patong</a>
+    <button class="navbar-toggle" id="nav-toggle"><span></span><span></span><span></span></button>
+    <div class="navbar-links" id="nav-links">
+      <a href="/pages/scan.html">Scan</a>
+      <a href="/pages/dashboard.html" class="nav-auth-only">Dashboard</a>
+      <a href="/pages/catalog.html" class="nav-auth-only">Rewards</a>
+      <a href="/pages/info.html">E-Waste Info</a>
+    </div>
+    <div class="navbar-auth" id="nav-auth"></div>
+  </div>
+</nav>
+
+<!-- Shown for a moment while we check who you are -->
+<div id="auth-loading">
+  <div class="container section" style="padding-top:5rem;text-align:center">
+    <div class="spinner" style="margin:0 auto"></div>
+    <p class="mt-3" style="color:var(--gray)">Checking admin access…</p>
+  </div>
+</div>
+
+<!-- Friendly message if somehow a non-admin gets here. The SERVER is the real lock. -->
+<div id="admin-denied" class="hidden">
+  <div class="container section" style="padding-top:4rem;text-align:center">
+    <div style="font-size:3.5rem;margin-bottom:1rem">🚫</div>
+    <h1 style="color:var(--white)">Access denied</h1>
+    <p class="mt-2">This area is for e-Patong admins only.</p>
+    <div class="mt-4"><a href="/" class="btn btn-primary">← Back to Home</a></div>
+  </div>
+</div>
+
+<div id="admin-content" class="hidden">
+
+  <div class="page-header">
+    <div class="container">
+      <h1>🛠️ Admin Panel</h1>
+      <p>Manage rewards, e-waste values, vouchers, and see what is happening in e-Patong.</p>
+    </div>
+  </div>
+
+  <main class="container" style="padding-top:2rem;padding-bottom:4rem">
+
+    <div class="admin-tabs" id="admin-tabs" role="tablist">
+      <button class="admin-tab active" data-tab="overview">📊 Overview</button>
+      <button class="admin-tab" data-tab="rewards">🎁 Rewards</button>
+      <button class="admin-tab" data-tab="categories">♻️ E-Waste Values</button>
+      <button class="admin-tab" data-tab="vouchers">🎟️ Vouchers</button>
+      <button class="admin-tab" data-tab="users">👥 Users</button>
+      <button class="admin-tab" data-tab="scans">📷 Scans</button>
+      <button class="admin-tab" data-tab="reviews">🔍 Review Scans</button>
+      <button class="admin-tab" data-tab="confidence">🎯 Confidence</button>
+      <button class="admin-tab" data-tab="accuracy">📈 Accuracy</button>
+      <button class="admin-tab" data-tab="logs">📝 Activity Log</button>
+    </div>
+
+    <!-- ── OVERVIEW ───────────────────────────────────────── -->
+    <section id="panel-overview" class="admin-panel">
+      <div class="grid-4" id="stats-grid"></div>
+    </section>
+
+    <!-- ── REWARDS ────────────────────────────────────────── -->
+    <section id="panel-rewards" class="admin-panel hidden">
+      <div class="admin-toolbar">
+        <h2>Rewards</h2>
+        <button class="btn btn-primary btn-sm" data-action="add-reward">＋ Add reward</button>
+      </div>
+      <p class="text-sm mb-2">Rewards are never deleted. Turn one <strong>off</strong> to hide it from users (vouchers already redeemed keep working).</p>
+      <div id="rewards-table"></div>
+    </section>
+
+    <!-- ── E-WASTE VALUES ─────────────────────────────────── -->
+    <section id="panel-categories" class="admin-panel hidden">
+      <div class="admin-toolbar"><h2>E-waste values</h2></div>
+      <p class="text-sm mb-2">Change the peso value range and the points of each category. New numbers are used by the next scan.</p>
+      <div id="categories-table"></div>
+    </section>
+
+    <!-- ── VOUCHERS ───────────────────────────────────────── -->
+    <section id="panel-vouchers" class="admin-panel hidden">
+      <div class="admin-toolbar"><h2>Check a voucher</h2></div>
+      <form id="voucher-form" class="admin-search" style="max-width:520px" autocomplete="off">
+        <input class="form-input" id="voucher-code" type="text" maxlength="50"
+               placeholder="EPAT-XXXX-XXXX" aria-label="Voucher code" style="text-transform:uppercase">
+        <button class="btn btn-primary" type="submit">Check</button>
+      </form>
+      <div id="voucher-result"></div>
+    </section>
+
+    <!-- ── USERS ──────────────────────────────────────────── -->
+    <section id="panel-users" class="admin-panel hidden">
+      <div class="admin-toolbar">
+        <h2>Users</h2>
+        <form class="admin-search" id="users-search">
+          <input class="form-input" type="search" maxlength="100" placeholder="Search name or email" aria-label="Search users">
+          <button class="btn btn-ghost btn-sm" type="submit">Search</button>
+        </form>
+      </div>
+      <div id="users-table"></div>
+      <div id="users-pager" class="admin-pager"></div>
+    </section>
+
+    <!-- ── SCANS ──────────────────────────────────────────── -->
+    <section id="panel-scans" class="admin-panel hidden">
+      <div class="admin-toolbar">
+        <h2>Scans</h2>
+        <form class="admin-search" id="scans-search">
+          <input class="form-input" type="search" maxlength="100" placeholder="Search item, condition, or user" aria-label="Search scans">
+          <button class="btn btn-ghost btn-sm" type="submit">Search</button>
+        </form>
+      </div>
+      <div id="scans-table"></div>
+      <div id="scans-pager" class="admin-pager"></div>
+    </section>
+
+    <!-- ── REVIEW SCANS (MEDIUM + LOW) ────────────────────── -->
+    <section id="panel-reviews" class="admin-panel hidden">
+      <div class="admin-toolbar">
+        <h2>Review scans</h2>
+        <div class="admin-search">
+          <select class="form-input" id="reviews-level" aria-label="Filter by level">
+            <option value="">All (Medium + Low)</option>
+            <option value="medium">⚠️ Medium only</option>
+            <option value="low">❌ Low only</option>
+          </select>
+        </div>
+      </div>
+      <p class="text-sm mb-2">Scans the AI was not sure about. Use them to improve the model later. Photos are never saved — only the guesses and numbers.</p>
+      <div id="reviews-summary" class="review-summary"></div>
+      <div id="reviews-table"></div>
+      <div id="reviews-pager" class="admin-pager"></div>
+    </section>
+
+    <!-- ── CONFIDENCE CUTOFFS ─────────────────────────────── -->
+    <section id="panel-confidence" class="admin-panel hidden">
+      <div class="admin-toolbar"><h2>Confidence levels</h2></div>
+      <p class="text-sm mb-2">The AI gives a confidence number for its best guess. These two cutoffs decide what happens to a scan. The server uses them for every scan.</p>
+      <div class="card cutoff-card">
+        <div class="form-group">
+          <label class="form-label" for="cut-low">LOW cutoff (%)</label>
+          <input class="form-input" id="cut-low" type="number" min="1" max="100" step="1" inputmode="numeric">
+          <div class="text-sm cell-muted">Below this → ❌ LOW. The item is not identified and earns no points.</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="cut-high">HIGH cutoff (%)</label>
+          <input class="form-input" id="cut-high" type="number" min="1" max="100" step="1" inputmode="numeric">
+          <div class="text-sm cell-muted">At or above this → ✅ HIGH (normal result). Between the two → ⚠️ MEDIUM (the user picks a guess).</div>
+        </div>
+        <div id="cut-preview" class="cut-preview"></div>
+        <div id="cut-error" class="alert alert-error hidden mb-2"></div>
+        <button class="btn btn-primary" id="cut-save" data-action="save-cutoffs">Save cutoffs</button>
+        <p class="text-sm cell-muted mt-1" id="cut-updated"></p>
+      </div>
+    </section>
+
+    <!-- ── ACCURACY (user feedback) ───────────────────────── -->
+    <section id="panel-accuracy" class="admin-panel hidden">
+      <div class="admin-toolbar"><h2>Accuracy</h2></div>
+      <p class="text-sm mb-2">What users tell us: "Was this right?" on HIGH results, and which guess they pick on MEDIUM results. These are the users' own answers, not a lab test. Few answers means an unreliable number.</p>
+      <div class="grid-4" id="accuracy-cards"></div>
+      <h3 class="acc-heading">By category (HIGH scans that were rated)</h3>
+      <div id="accuracy-by-category"></div>
+      <h3 class="acc-heading">Most common mix-ups</h3>
+      <div id="accuracy-confusions"></div>
+      <h3 class="acc-heading">LOW scans: what users said they were</h3>
+      <div id="accuracy-low"></div>
+    </section>
+
+    <!-- ── ACTIVITY LOG ───────────────────────────────────── -->
+    <section id="panel-logs" class="admin-panel hidden">
+      <div class="admin-toolbar"><h2>Activity log</h2></div>
+      <p class="text-sm mb-2">Everything an admin changed, newest first.</p>
+      <div id="logs-table"></div>
+      <div id="logs-pager" class="admin-pager"></div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ── Add / Edit reward (uses your existing modal style) ─── -->
+<div class="modal-overlay hidden" id="reward-modal">
+  <div class="modal">
+    <button class="modal-close" data-action="close-reward" aria-label="Close">×</button>
+    <div class="modal-title" id="reward-modal-title">Add reward</div>
+
+    <div id="rw-error" class="alert alert-error hidden mb-2"></div>
+
+    <div class="form-group">
+      <label class="form-label" for="rw-name">Name</label>
+      <input class="form-input" id="rw-name" type="text" maxlength="255" placeholder="₱20 GCash Credit">
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="rw-desc">Description</label>
+      <textarea class="form-input" id="rw-desc" maxlength="1000" placeholder="What the user gets"></textarea>
+    </div>
+    <div class="grid-2" style="gap:1rem">
+      <div class="form-group">
+        <label class="form-label" for="rw-type">Type</label>
+        <select class="form-input" id="rw-type">
+          <option value="gcash">GCash</option>
+          <option value="eload">E-Load</option>
+          <option value="voucher">Voucher</option>
+          <option value="discount">Discount</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="rw-value">Reward value</label>
+        <input class="form-input" id="rw-value" type="text" maxlength="100" placeholder="₱20">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="rw-points">Points required</label>
+        <input class="form-input" id="rw-points" type="number" min="1" max="1000000" step="1" inputmode="numeric">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="rw-emoji">Emoji</label>
+        <input class="form-input" id="rw-emoji" type="text" maxlength="8" placeholder="🎁">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="rw-stock">Stock</label>
+      <input class="form-input" id="rw-stock" type="number" min="0" max="1000000" step="1" inputmode="numeric">
+      <label class="check-row"><input type="checkbox" id="rw-unlimited"> Unlimited stock</label>
+    </div>
+
+    <div class="flex gap-2">
+      <button class="btn btn-ghost btn-full" data-action="close-reward">Cancel</button>
+      <button class="btn btn-primary btn-full" id="rw-save" data-action="save-reward">Save</button>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <p>© 2026 <strong>e-Patong</strong> — EVSU Information Technology Department</p>
+  <p class="mt-1">Developed for <strong>Brgy. 49 Youngfield</strong>, Tacloban City</p>
+</footer>
+
+<div id="toast-container"></div>
+<script src="/js/api.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/admin/admin.js"></script>
+</body>
+</html>

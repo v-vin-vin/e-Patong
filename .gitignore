@@ -1,0 +1,10 @@
+# Dependencies
+node_modules/
+
+# Secrets - never commit real credentials
+.env
+.env.local
+
+# OS/editor cruft
+.DS_Store
+*.log
